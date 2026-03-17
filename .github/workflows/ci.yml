@@ -83,6 +83,9 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Fix Rails permission
+        run: chmod +x bin/rails
+
       - name: Run tests
         env:
           RAILS_ENV: test
