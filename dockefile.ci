@@ -2,11 +2,20 @@ FROM ruby:3.2
 
 WORKDIR /app
 
-RUN apt-get update -qq && apt-get install -y nodejs sqlite3
+# Install required packages
+RUN apt-get update -qq && apt-get install -y nodejs sqlite3 libsqlite3-dev
 
+# Install bundler
+RUN gem install bundler
+
+# Copy Gemfiles
 COPY Gemfile Gemfile.lock ./
+
+# Install gems
 RUN bundle install
 
+# Copy full app
 COPY . .
 
-CMD ["echo", "Docker build successful"]
+# Just test build
+RUN echo "Build successful"
