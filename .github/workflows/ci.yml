@@ -45,17 +45,14 @@ jobs:
       - name: Run tests
         run: bundle exec rails test
 
-        docker-build:
-        runs-on: ubuntu-latest
-        needs: [test]
+       docker-build:
+       runs-on: ubuntu-latest
+       needs: [test]
 
-     steps:
-     - name: Checkout code
-       uses: actions/checkout@v4
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v4
 
-     - name: Build Docker Image
-       run: |
-        docker build \
-        --build-arg SECRET_KEY_BASE_DUMMY=1 \
-        -t legal_app .
+       - name: Build Docker Image (CI safe)
+         run: docker build -f Dockerfile.ci -t legal_app .
          
