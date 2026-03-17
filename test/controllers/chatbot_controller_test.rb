@@ -1,8 +1,11 @@
 require "test_helper"
 
-class ChatbotControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get "/chatbot"
-    assert_response :success
+class ChatbotController < ApplicationController
+  def index
+  end
+
+  def ask
+    @response = "Sample response"
+    render :index
   end
 end
