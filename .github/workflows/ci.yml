@@ -20,18 +20,18 @@ jobs:
 
       - name: Fix bin files
         run: |
-         chmod +x bin/*
-         sed -i 's/ruby\.exe/ruby/' bin/*
+          chmod +x bin/*
+          sed -i 's/ruby\.exe/ruby/' bin/*
 
       - name: Setup DB and Run tests
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
           bundle exec rails test
-          
-      docker-build:
-       runs-on: ubuntu-latest
-       needs: test
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: test
 
     steps:
       - name: Checkout code
