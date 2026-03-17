@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  get 'home/index'
-  get 'chatbot/index'
+  root "home#index"
+
+  get "/chatbot", to: "chatbot#index"
+  post "/chatbot/ask", to: "chatbot#ask"
 end
