@@ -1,0 +1,19 @@
+<h1>Legal Chatbot 🤖</h1>
+
+<form action="/chatbot/ask" method="get">
+  <div>
+    <label>Ask your legal question:</label><br>
+    <input type="text" name="message" required>
+  </div>
+
+  <div style="margin-top:10px;">
+    <input type="submit" value="Ask">
+  </div>
+</form>
+
+<hr>
+
+<% if @response.present? %>
+  <h3>Bot Response:</h3>
+  <p><%= @response %></p>
+<% end %>
