@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  get "home/index"
-  get "chatbot/index"
+  get "chatbot", to: "chatbot#index"
 
   resources :cases
 end

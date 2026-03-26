@@ -1,19 +1,44 @@
-<h1>Legal Chatbot 🤖</h1>
+<div class="chat-wrapper">
 
-<form action="/chatbot/ask" method="get">
-  <div>
-    <label>Ask your legal question:</label><br>
-    <input type="text" name="message" required>
+  <div class="chat-header">
+    ⚖️ Legal AI Assistant
   </div>
 
-  <div style="margin-top:10px;">
-    <input type="submit" value="Ask">
+  <div class="chat-box" id="chat-box">
+    <div class="msg bot">Hello 👋 Ask me any legal question.</div>
   </div>
-</form>
 
-<hr>
+  <div class="chat-input">
+    <input type="text" id="user-input" placeholder="Ask your legal question..." />
+    <button onclick="sendMessage()">➤</button>
+  </div>
 
-<% if @response.present? %>
-  <h3>Bot Response:</h3>
-  <p><%= @response %></p>
-<% end %>
+</div>
+
+<script>
+function sendMessage() {
+  let input = document.getElementById("user-input");
+  let message = input.value.trim();
+  if(message === "") return;
+
+  let chatBox = document.getElementById("chat-box");
+
+  // User message
+  let userMsg = document.createElement("div");
+  userMsg.className = "msg user";
+  userMsg.innerText = message;
+  chatBox.appendChild(userMsg);
+
+  input.value = "";
+
+  // Fake bot reply
+  setTimeout(() => {
+    let botMsg = document.createElement("div");
+    botMsg.className = "msg bot";
+    botMsg.innerText = "This is a sample AI legal response.";
+    chatBox.appendChild(botMsg);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 800);
+}
+</script>
