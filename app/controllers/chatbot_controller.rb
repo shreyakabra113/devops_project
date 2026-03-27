@@ -11,18 +11,18 @@ class ChatbotController < ApplicationController
       user_input = user_input.downcase
 
       if user_input.include?("property")
-        @response = "Property disputes involve ownership and legal rights."
+        reply = "Property disputes involve ownership and legal rights. Identify the property, the parties, and any existing agreements before choosing a remedy."
       elsif user_input.include?("divorce")
-        @response = "Divorce is the legal process of ending a marriage."
+        reply = "Divorce ends a marriage through a court order. Typical steps: file a petition, serve the spouse, negotiate property/custody, then finalize the decree."
       elsif user_input.include?("contract")
-        @response = "A contract is a legally binding agreement."
+        reply = "A contract is a legally binding agreement. Check offer, acceptance, consideration, capacity, and legality to assess validity."
       else
-        @response = "Sorry, I can only answer basic legal questions."
+        reply = "I can answer basic legal questions on property, divorce, or contracts. For complex matters, consult a licensed attorney."
       end
     else
-      @response = "Please enter a question."
+      reply = "Please enter a question."
     end
 
-    render :index
+    render json: { reply: reply }
   end
 end

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legal-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legal-app
+  template:
+    metadata:
+      labels:
+        app: legal-app
+    spec:
+      containers:
+      - name: legal-app
+        image: shreya2364/legal_app
+        ports:
+        - containerPort: 80
+        env:
+        - name: SECRET_KEY_BASE
+          value: "dummy"

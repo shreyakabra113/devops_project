@@ -1,10 +1,163 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* General */
+body {
+  background: #f6f8fb;
+  color: #0f172a;
+}
+
+a {
+  text-decoration: none;
+}
+
+.text-white-75 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hero */
+.hero-banner {
+  background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.22), transparent 25%),
+              radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.25), transparent 30%),
+              linear-gradient(120deg, #0f172a, #111827 60%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  color: #e5e7eb;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+}
+
+.sample-chat .chat-line {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.sample-chat .label {
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.sample-chat .label.bot {
+  color: #0ea5e9;
+}
+
+.sample-chat .label.user {
+  color: #f97316;
+}
+
+/* Feature tiles */
+.feature-tile {
+  background: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.icon-pill {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* CTA panel */
+.cta-panel {
+  border: 1px solid #e2e8f0;
+}
+
+/* Chat page */
+.chat-shell {
+  background: linear-gradient(135deg, #0f172a, #111827);
+  min-height: 80vh;
+}
+
+.chat-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.chat-card__header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.chat-card__body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: #fdfefe;
+}
+
+.chat-card__footer {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.chat-message {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.chat-message .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.chat-message.user .avatar {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.chat-message.bot .avatar {
+  background: #e0f2fe;
+  color: #0ea5e9;
+}
+
+.chat-message .bubble {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 10px 12px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.chat-message.bot .bubble {
+  background: #f8fafc;
+}
+
+@media (max-width: 768px) {
+  .chat-card__body {
+    max-height: 55vh;
+  }
+  .feature-tile, .glass-card {
+    border-radius: 14px;
+  }
+}

@@ -1,19 +1,83 @@
-<h1>Legal Chatbot 🤖</h1>
+<div class="chat-shell py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="chat-card shadow-lg rounded-4 overflow-hidden">
+          <div class="chat-card__header d-flex align-items-center justify-content-between">
+            <div>
+              <div class="small text-uppercase text-muted">Legal AI Assistant</div>
+              <h4 class="mb-0 fw-bold">Ask anything about your matter</h4>
+            </div>
+            <span class="badge bg-success-subtle text-success">Online</span>
+          </div>
 
-<form action="/chatbot/ask" method="get">
-  <div>
-    <label>Ask your legal question:</label><br>
-    <input type="text" name="message" required>
+          <div id="chat-window" class="chat-card__body">
+            <div class="chat-message bot">
+              <div class="avatar">AI</div>
+              <div class="bubble">
+                Hi there! Ask a legal question and I'll respond with concise guidance.
+              </div>
+            </div>
+          </div>
+
+          <form id="chat-form" class="chat-card__footer">
+            <input id="chat-input" type="text" class="form-control" placeholder="Type your question…" autocomplete="off" />
+            <button class="btn btn-primary ms-2" type="submit">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div style="margin-top:10px;">
-    <input type="submit" value="Ask">
-  </div>
-</form>
+<script>
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.getElementById("chat-input");
+  const chatWindow = document.getElementById("chat-window");
 
-<hr>
+  function appendMessage(text, role) {
+    const wrapper = document.createElement("div");
+    wrapper.className = `chat-message ${role}`;
 
-<% if @response.present? %>
-  <h3>Bot Response:</h3>
-  <p><%= @response %></p>
-<% end %>
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+    avatar.textContent = role === "user" ? "You" : "AI";
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = text;
+
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(bubble);
+    chatWindow.appendChild(wrapper);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+
+  async function askBot(question) {
+    const response = await fetch("/chatbot/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: question })
+    });
+
+    if (!response.ok) {
+      appendMessage("Sorry, something went wrong. Please try again.", "bot");
+      return;
+    }
+
+    const data = await response.json();
+    appendMessage(data.reply, "bot");
+  }
+
+  chatForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    appendMessage(message, "user");
+    chatInput.value = "";
+    askBot(message);
+  });
+</script>

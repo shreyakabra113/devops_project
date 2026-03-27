@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Legal App" %></title>
+    <title>LegalApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Legal App">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column min-vh-100" style="font-family: 'Manrope', system-ui, -apple-system, sans-serif;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/">LegalApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto gap-2">
+            <li class="nav-item"><a class="nav-link <%= 'active' if current_page?(root_path) %>" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link <%= 'active' if controller_name == 'cases' %>" href="/cases">Cases</a></li>
+            <li class="nav-item"><a class="nav-link <%= 'active' if controller_name == 'chatbot' %>" href="/chatbot">Chatbot</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-fill">
+      <%= yield %>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <span>&copy; <%= Time.current.year %> LegalApp. All rights reserved.</span>
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+          <a class="text-white text-decoration-none" href="#">Privacy</a>
+          <a class="text-white text-decoration-none" href="#">Terms</a>
+          <a class="text-white text-decoration-none" href="mailto:support@legalapp.test">Support</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
